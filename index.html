@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Saved Login Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="grid"></div>
+  </div>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🔐</div>
+        <div>
+          <h1>Saved Login Demo</h1>
+          <p class="muted">Demo only — stores accounts in <strong>this browser</strong> (localStorage).</p>
+        </div>
+      </div>
+
+      <div class="chips" aria-label="Quick stats">
+        <div class="chip" title="Total saved accounts">
+          <span class="chipLabel">Saved</span>
+          <span id="countChip" class="chipValue">0</span>
+        </div>
+        <div class="chip" title="Password visibility">
+          <span class="chipLabel">Passwords</span>
+          <span id="pwChip" class="chipValue">Hidden</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="card">
+      <form id="saveForm" class="panel" autocomplete="off">
+        <div class="panelHead">
+          <h2>Add an account</h2>
+          <span class="hint">Tip: usernames must be unique</span>
+        </div>
+
+        <div class="fieldGrid">
+          <label class="field">
+            <span class="labelText">Username</span>
+            <div class="control">
+              <span class="icon" aria-hidden="true">👤</span>
+              <input id="username" required placeholder="e.g. student01" inputmode="text" />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="labelText">Password</span>
+            <div class="control">
+              <span class="icon" aria-hidden="true">•••</span>
+              <input id="password" type="password" required placeholder="e.g. pass1234" />
+              <button id="revealNewPwBtn" type="button" class="ghost small" aria-label="Show or hide password">
+                Show
+              </button>
+            </div>
+            <div class="meterRow" aria-hidden="true">
+              <div class="meter">
+                <div id="pwMeterFill" class="meterFill" style="width:0%"></div>
+              </div>
+              <span id="pwMeterText" class="meterText">Strength: —</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="row">
+          <button type="submit" class="btn primary">
+            <span aria-hidden="true">＋</span>
+            Add Account
+          </button>
+
+          <button id="clearBtn" type="button" class="btn danger">
+            <span aria-hidden="true">🗑️</span>
+            Clear All
+          </button>
+        </div>
+
+        <p id="msg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+
+      <section class="panel">
+        <div class="panelHead">
+          <h2>Saved accounts</h2>
+
+          <div class="toolbar">
+            <div class="search">
+              <span class="icon" aria-hidden="true">🔎</span>
+              <input id="searchInput" placeholder="Search username…" />
+            </div>
+
+            <select id="sortSelect" class="select" aria-label="Sort saved accounts">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="az">Username A→Z</option>
+              <option value="za">Username Z→A</option>
+            </select>
+
+            <button id="togglePassBtn" type="button" class="btn secondary small">
+              Show passwords
+            </button>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty">
+          <div class="emptyIcon" aria-hidden="true">✨</div>
+          <div class="emptyTitle">No saved accounts yet</div>
+          <div class="muted small">Add one above to see it appear here.</div>
+        </div>
+
+        <div id="list" class="list" role="list"></div>
+      </section>
+    </section>
+
+    <footer class="footer muted small">
+      Built as a static demo. Avoid storing real passwords in localStorage.
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
